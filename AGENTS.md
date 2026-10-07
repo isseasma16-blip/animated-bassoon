@@ -22,6 +22,10 @@ was generated for the Base44 sandbox.
 - `migrate` is a one-shot service ordered with `service_completed_successfully`. The
   `api` service will not start if a migration fails — check `docker compose logs migrate`.
 - `gen_random_uuid()` is used for task ids; it is built into Postgres 13+, no extension.
+- `npm run build` (`tsc --noEmit && vite build`) type-checks `vite.config.ts`, which
+  reads `process.env`. That requires `@types/node` in the frontend `devDependencies`
+  and `"node"` in the frontend tsconfig `types`. The Vite dev server does not type-check,
+  so a missing `@types/node` only shows up as a build failure, never at runtime.
 
 ## Verify the app works
 
